@@ -51,10 +51,27 @@ function getAverageTravelledWith(reviews: Review[]) {
   return categories;
 }
 
-function getReviewWeight(review: Review) {
-  // TODO: return the right calculations here instead of 1
-  // according to the provided info in README.md file
-  return 1;
+export function getReviewWeight(review: Review) {
+  // When the review is older than 5 years its weight value defaults to 0.5.
+  // Otherwise it equals: 1 - (current_year - year_of_review)*0.1
+
+  const currentTimestamp = Date.now();
+  const reviewTimestamp = review.entryDate;
+
+  const diffInYears = convertMsToYears(currentTimestamp - reviewTimestamp);
+
+  if (diffInYears > 5) {
+    return 0.5;
+  }
+
+  const currentYear = new Date(currentTimestamp).getFullYear();
+  const reviewYear = new Date(reviewTimestamp).getFullYear();
+
+  return 1 - (currentYear - reviewYear) * 0.1;
+}
+
+function convertMsToYears(ms: number) {
+  return ms / 1000 / 60 / 60 / 24 / 365.25;
 }
 
 export default {
