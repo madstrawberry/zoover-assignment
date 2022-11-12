@@ -28,7 +28,9 @@ export function Reviews() {
       {isFetchingReviews && <>Is fetching reviews...</>}
 
       {!isFetchingReviews &&
-        reviews.map((review) => <p>{review.titles[review.locale]}</p>)}
+        reviews.map((review) => (
+          <p key={review.id}>{review.titles[review.locale]}</p>
+        ))}
     </>
   );
 }
