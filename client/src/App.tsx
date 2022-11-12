@@ -14,14 +14,14 @@ function App() {
 
   const [isFetchingRatings, setIsFetchingRatings] = useState(true);
 
-  async function fetchAverageRating() {
+  const fetchAverageRating = async () => {
     setIsFetchingRatings(true);
 
     const data = await ReviewsApi.getReviewAverages();
 
     setAverageRatings(data);
     setIsFetchingRatings(false);
-  }
+  };
 
   useEffect(() => {
     fetchAverageRating();
