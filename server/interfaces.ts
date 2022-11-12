@@ -27,11 +27,3 @@ export interface General {
 export interface Texts {
   [key: string]: string;
 }
-
-// export type Review = {
-//   ratings: {
-//     aspects: Aspect[];
-//   };
-// };
-
-// type Aspect = number[];
