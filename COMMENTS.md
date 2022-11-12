@@ -21,5 +21,3 @@ Assuming from the task description that when the difference in years is less tha
 ## Task 2
 
 For now, due to lack of time, I only handled the happy path and have not implemented an error state if something went wrong fetching data.
-
-I would also move fetching the data to a separate service, so it will be easier to replace or mock the fetching logic.

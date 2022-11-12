@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Review } from "../../../../server/interfaces";
-import { ReviewsResponse } from "../../interfaces/reviews";
+import { ReviewsApi } from "../../ReviewsApi";
 
 export function Reviews() {
   const [isFetchingReviews, setIsFetchingReviews] = useState(true);
@@ -9,14 +9,10 @@ export function Reviews() {
   async function fetchReviews() {
     setIsFetchingReviews(true);
 
-    const response = await fetch("http://localhost:8080/reviews?limit=10");
-    const data: ReviewsResponse = await response.json();
+    const data = await ReviewsApi.getReviews({ limit: 10 });
 
-    // Add fake delay to imitate time it takes to fetch the data
-    setTimeout(() => {
-      setReviews(data.limited);
-      setIsFetchingReviews(false);
-    }, 400);
+    setReviews(data);
+    setIsFetchingReviews(false);
   }
 
   useEffect(() => {

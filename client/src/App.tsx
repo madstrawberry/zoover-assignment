@@ -5,6 +5,7 @@ import { TravelledWithAverages } from "./components/accomodation/TravelledWithAv
 import { PageTitle } from "./components/shared/PageTitle";
 import { AverageRatingsResponse } from "./interfaces/ratings";
 import { Reviews } from "./components/accomodation/Reviews";
+import { ReviewsApi } from "./ReviewsApi";
 
 function App() {
   const [averageRatings, setAverageRatings] = useState<
@@ -16,14 +17,10 @@ function App() {
   async function fetchAverageRating() {
     setIsFetchingRatings(true);
 
-    const response = await fetch("http://localhost:8080/reviews/average");
-    const data: AverageRatingsResponse = await response.json();
+    const data = await ReviewsApi.getReviewAverages();
 
-    // Add fake delay to imitate time it takes to fetch the data
-    setTimeout(() => {
-      setAverageRatings(data);
-      setIsFetchingRatings(false);
-    }, 200);
+    setAverageRatings(data);
+    setIsFetchingRatings(false);
   }
 
   useEffect(() => {
