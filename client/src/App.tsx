@@ -52,7 +52,7 @@ function App() {
         <div className="mt-5 ">
           <TravelledWithAverages
             isLoading={isFetchingRatings}
-            ratings={averageRatings?.aspecsAvg}
+            ratings={averageRatings?.traveledWithAvg}
           />
         </div>
       </div>
