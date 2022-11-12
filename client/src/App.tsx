@@ -3,11 +3,12 @@ import "./App.css";
 import { AspectAverages } from "./components/accomodation/AspectAverages";
 import { TravelledWithAverages } from "./components/accomodation/TravelledWithAverages";
 import { PageTitle } from "./components/shared/PageTitle";
-import { AverageRatings } from "./interfaces/ratings";
+import { AverageRatingsResponse } from "./interfaces/ratings";
+import { Reviews } from "./components/accomodation/Reviews";
 
 function App() {
   const [averageRatings, setAverageRatings] = useState<
-    AverageRatings | undefined
+    AverageRatingsResponse | undefined
   >(undefined);
 
   const [isFetchingRatings, setIsFetchingRatings] = useState(true);
@@ -16,8 +17,9 @@ function App() {
     setIsFetchingRatings(true);
 
     const response = await fetch("http://localhost:8080/reviews/average");
-    const data: AverageRatings = await response.json();
+    const data: AverageRatingsResponse = await response.json();
 
+    // Add fake delay to imitate time it takes to fetch the data
     setTimeout(() => {
       setAverageRatings(data);
       setIsFetchingRatings(false);
@@ -56,6 +58,14 @@ function App() {
             ratings={averageRatings?.aspecsAvg}
           />
         </div>
+      </div>
+
+      <div className="bg-slate-100 border-y border-slate-200 mt-5">
+        <div className="max-w-5xl px-8 py-3 mx-auto">Filter reviews by:</div>
+      </div>
+
+      <div className="max-w-5xl px-8 mt-5 mx-auto">
+        <Reviews />
       </div>
     </div>
   );

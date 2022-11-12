@@ -1,4 +1,4 @@
-export type AverageRatings = {
+export type AverageRatingsResponse = {
   generalAvg: number;
   aspecsAvg: {
     [key: string]: number;

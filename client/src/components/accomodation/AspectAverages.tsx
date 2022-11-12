@@ -1,9 +1,9 @@
-import { AverageRatings } from "../../interfaces/ratings";
+import { AverageRatingsResponse } from "../../interfaces/ratings";
 import { Subtitle } from "../shared/Subtitle";
 
 type Props = {
   isLoading: boolean;
-  ratings?: AverageRatings["aspecsAvg"];
+  ratings?: { [aspectName: string]: number };
 };
 
 export function AspectAverages({ isLoading, ratings }: Props) {

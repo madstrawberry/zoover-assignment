@@ -1,9 +1,8 @@
-import { AverageRatings } from "../../interfaces/ratings";
 import { Subtitle } from "../shared/Subtitle";
 
 type Props = {
   isLoading: boolean;
-  ratings?: AverageRatings["traveledWithAvg"];
+  ratings?: { [travelledWithType: string]: number };
 };
 
 export function TravelledWithAverages({ isLoading, ratings }: Props) {
@@ -15,9 +14,9 @@ export function TravelledWithAverages({ isLoading, ratings }: Props) {
 
       {!isLoading && ratings && (
         <>
-          {Object.keys(ratings).map((travelledWith) => (
-            <p key={travelledWith}>
-              {travelledWith}: {ratings[travelledWith]}
+          {Object.keys(ratings).map((travelledWithType) => (
+            <p key={travelledWithType}>
+              {travelledWithType}: {ratings[travelledWithType]}
             </p>
           ))}
         </>

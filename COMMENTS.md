@@ -17,3 +17,9 @@ Assuming the date required to calculate the average is: `entryDate`
 Assuming the `entryDate` is a UNIX timestamp in ms.
 
 Assuming from the task description that when the difference in years is less than 5, we calculate the difference taking only the year of date of the review (so regardless if it were written in january or december) and not necessarily calculate the full difference in years up until now.
+
+## Task 2
+
+For now, due to lack of time, I only handled the happy path and have not implemented an error state if something went wrong fetching data.
+
+I would also move fetching the data to a separate service, so it will be easier to replace or mock the fetching logic.
