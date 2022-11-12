@@ -1,8 +1,33 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import { PageTitle } from "./components/PageTitle";
-import { Subtitle } from "./components/Subtitle";
+import { AspectAverages } from "./components/accomodation/AspectAverages";
+import { TravelledWithAverages } from "./components/accomodation/TravelledWithAverages";
+import { PageTitle } from "./components/shared/PageTitle";
+import { AverageRatings } from "./interfaces/ratings";
 
 function App() {
+  const [averageRatings, setAverageRatings] = useState<
+    AverageRatings | undefined
+  >(undefined);
+
+  const [isFetchingRatings, setIsFetchingRatings] = useState(true);
+
+  async function fetchAverageRating() {
+    setIsFetchingRatings(true);
+
+    const response = await fetch("http://localhost:8080/reviews/average");
+    const data: AverageRatings = await response.json();
+
+    setTimeout(() => {
+      setAverageRatings(data);
+      setIsFetchingRatings(false);
+    }, 200);
+  }
+
+  useEffect(() => {
+    fetchAverageRating();
+  }, []);
+
   return (
     <div className="mt-8">
       <div className="max-w-5xl px-8 mx-auto">
@@ -19,11 +44,17 @@ function App() {
         </p>
 
         <div className="mt-5 ">
-          <Subtitle>The average ratings for this accomodation</Subtitle>
+          <AspectAverages
+            isLoading={isFetchingRatings}
+            ratings={averageRatings?.aspecsAvg}
+          />
         </div>
 
         <div className="mt-5 ">
-          <Subtitle>The percentages of travelledWith</Subtitle>
+          <TravelledWithAverages
+            isLoading={isFetchingRatings}
+            ratings={averageRatings?.aspecsAvg}
+          />
         </div>
       </div>
     </div>
