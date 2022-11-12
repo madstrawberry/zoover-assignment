@@ -57,13 +57,7 @@ function App() {
         </div>
       </div>
 
-      <div className="bg-slate-100 border-y border-slate-200 mt-5">
-        <div className="max-w-5xl px-8 py-3 mx-auto">Filter reviews by:</div>
-      </div>
-
-      <div className="max-w-5xl px-8 mt-5 mx-auto">
-        <Reviews />
-      </div>
+      <Reviews />
     </div>
   );
 }

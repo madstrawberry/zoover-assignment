@@ -14,13 +14,24 @@ export namespace ReviewsApi {
     return data;
   }
 
-  type Options = {
+  export type ReviewFilterOptions = {
+    start?: number;
     limit?: number;
+    filterBy?: string;
+    sortBy?: string;
   };
 
-  export async function getReviews({ limit = 10 }: Options) {
+  export async function getReviews({
+    limit = 10,
+    start = 1,
+    filterBy,
+    sortBy,
+  }: ReviewFilterOptions) {
+    const filterByUrl = filterBy ? `&filterBy=${filterBy}` : "";
+    const sortByUrl = sortBy ? `&sortBy=${sortBy}` : "";
+
     const response = await fetch(
-      `http://localhost:8080/reviews?limit=${limit}`
+      `http://localhost:8080/reviews?limit=${limit}&start=${start}${filterByUrl}${sortByUrl}`
     );
     const data: ReviewsResponse = await response.json();
 
