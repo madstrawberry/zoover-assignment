@@ -95,7 +95,15 @@ export function Reviews() {
 
         {!isFetchingReviews &&
           reviews.map((review) => (
-            <p key={review.id}>{review.titles[review.locale]}</p>
+            <div className="my-5" key={review.id}>
+              <strong>Title:</strong>
+              {review.titles[review.locale]} <br />
+              <strong>TravelledWith:</strong> {review.traveledWith} <br />
+              <strong>Travel date:</strong>{" "}
+              {new Date(review.travelDate).toLocaleDateString()} <br />
+              <strong>Entry date:</strong>{" "}
+              {new Date(review.entryDate).toLocaleDateString()} <br />
+            </div>
           ))}
       </div>
     </>
