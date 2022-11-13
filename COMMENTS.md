@@ -30,3 +30,6 @@ For the sort order I assumed for now 'new to old' (desc) which is how the server
   - not using gradients for full or empty stars
   - defining reusable star path
   - defining reusable gradients for all 9 steps and reuse them instead of generating them for each star
+- Add aria attributes for accessibility/screen readers
+- Look into using React Query for caching the results from the API
+- Possibily look into using useCallback/useMemo inside the components for performance
