@@ -13,13 +13,19 @@ export function TravelledWithAverages({ isLoading, ratings }: Props) {
       {isLoading && <>Loading ratings...</>}
 
       {!isLoading && ratings && (
-        <>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
           {Object.keys(ratings).map((travelledWithType) => (
-            <p key={travelledWithType}>
-              {travelledWithType}: {ratings[travelledWithType]}
-            </p>
+            <div key={travelledWithType}>
+              {travelledWithType}:{" "}
+              <div className="h-3 bg-slate-200 relative">
+                <div
+                  className="h-3 absolute left-0 bg-blue-700"
+                  style={{ width: `${ratings[travelledWithType] * 10}%` }}
+                />
+              </div>
+            </div>
           ))}
-        </>
+        </div>
       )}
     </>
   );
