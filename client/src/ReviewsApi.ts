@@ -38,6 +38,6 @@ export namespace ReviewsApi {
     // Add fake delay to imitate time it takes to fetch the data
     await delay(400);
 
-    return data.limited;
+    return { reviews: data.limited, total: data.filtered.length };
   }
 }

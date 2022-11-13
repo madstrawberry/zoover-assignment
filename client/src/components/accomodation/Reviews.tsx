@@ -11,6 +11,7 @@ const sorting = [
 export function Reviews() {
   const [isFetchingReviews, setIsFetchingReviews] = useState(true);
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [total, setTotal] = useState<number | undefined>();
 
   const [filterState, setFilterState] =
     useState<ReviewsApi.ReviewFilterOptions>({
@@ -27,7 +28,8 @@ export function Reviews() {
 
     const data = await ReviewsApi.getReviews(currentFilterState);
 
-    setReviews(data);
+    setReviews(data.reviews);
+    setTotal(data.total);
     setIsFetchingReviews(false);
   };
 
@@ -35,6 +37,7 @@ export function Reviews() {
     setFilterState((filterState) => ({
       ...filterState,
       filterBy: e.target.value,
+      start: 1,
     }));
   };
 
@@ -48,6 +51,13 @@ export function Reviews() {
   useEffect(() => {
     fetchReviews(filterState);
   }, [filterState]);
+
+  const onNavigateToPage = (start: number) => {
+    setFilterState((filterState) => ({
+      ...filterState,
+      start,
+    }));
+  };
 
   return (
     <>
@@ -89,7 +99,16 @@ export function Reviews() {
       </div>
 
       <div className="max-w-5xl px-8 mt-5 mx-auto">
-        {isFetchingReviews && <>Is fetching reviews...</>}
+        {total && (
+          <Pagination
+            total={total}
+            limit={filterState.limit!}
+            start={filterState.start!}
+            onClickPage={onNavigateToPage}
+          />
+        )}
+
+        {isFetchingReviews && <div>Is fetching reviews...</div>}
 
         {!isFetchingReviews &&
           reviews.map((review) => (
@@ -104,6 +123,40 @@ export function Reviews() {
             </div>
           ))}
       </div>
+    </>
+  );
+}
+
+function Pagination({
+  total,
+  limit,
+  start,
+  onClickPage,
+}: {
+  total: number;
+  limit: number;
+  start: number;
+  onClickPage: (start: number) => void;
+}) {
+  const pages = Math.ceil(total / limit);
+  const currentPage = Math.ceil(start / limit);
+
+  return (
+    <>
+      {new Array(pages).fill("").map((_, index) => {
+        const page = index + 1;
+
+        return (
+          <button
+            onClick={() => onClickPage(index * limit + 1)}
+            className={`px-3 py-1 cursor-pointer m-1 border text-blue-700 ${
+              currentPage === page ? "bg-slate-100" : ""
+            }`}
+          >
+            {page}
+          </button>
+        );
+      })}
     </>
   );
 }

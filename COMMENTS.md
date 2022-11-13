@@ -24,6 +24,10 @@ For now, due to lack of time, I only handled the happy path and have not impleme
 
 For the sort order I assumed for now 'new to old' (desc) which is how the server returns the data. I could image in the future the user would be able to reverse the sort order.
 
+I noticed there are different locales for the reviews. For now all reviews are shown regardless of language.
+
+Due to lack of time I was not able to style the reviews sections. Also pagination is still very basic and could be improved.
+
 ## Improvements
 
 - The implementation of showing the star rating can be improved a lot by
@@ -42,8 +46,9 @@ For the sort order I assumed for now 'new to old' (desc) which is how the server
 - I would test the `ReviewsApi` to verify we build the correct `/reviews` URL based on the props we pass to it
 - I would test the `Reviews` component and verify:
   - the loader shows correctly
-  - sorting and filtering calls the `ReviewsApi` with the correct filterState
+  - sorting and filtering calls the `ReviewsApi` with the correct filterState (filtering resets the start to 1)
   - sorting and filtering refreshes the shown reviews (we should mock the `ReviewsApi`, but still assert we update the reviews)
+  - pagination calls the `ReviewsApi` with the correct filterState
 - I would test the `App` component and verify:
   - it starts fetching the review averages
   - the loading state is set correctly for AspectAverages & TravelledWithAverages

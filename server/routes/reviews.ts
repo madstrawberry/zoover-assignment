@@ -13,9 +13,10 @@ router.get("/", function (req, res) {
     filterBy ? review.traveledWith === filterBy : true
   );
   let paginated = filtered.slice(
-    (start as number) - 1,
-    parseInt(limit as string)
+    parseInt(start as string) - 1,
+    parseInt(start as string) - 1 + parseInt(limit as string)
   );
+
   res.json({ all: data, filtered: filtered, limited: paginated });
 });
 

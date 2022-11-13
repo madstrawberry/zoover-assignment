@@ -1,4 +1,3 @@
-import { AverageRatingsResponse } from "../../interfaces/ratings";
 import { Subtitle } from "../shared/Subtitle";
 
 type Props = {
