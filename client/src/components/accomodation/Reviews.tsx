@@ -60,12 +60,10 @@ export function Reviews() {
                 onChange={onSelectFilter}
                 name="travelledWith"
                 id="travelledWith"
+                defaultValue={filterState.filterBy}
               >
-                {filters.map((filter) => (
-                  <option
-                    value={filter}
-                    selected={filterState.filterBy === filter}
-                  >
+                {filters.map((filter, index) => (
+                  <option key={index} value={filter}>
                     {filter || "ALL"}
                   </option>
                 ))}
@@ -73,7 +71,7 @@ export function Reviews() {
             </div>
             <div className="ml-auto flex">
               {sorting.map(([sortTitle, sortName]) => (
-                <div className="ml-4">
+                <div className="ml-4" key={sortName}>
                   <input
                     onChange={onSortBy}
                     type="radio"
