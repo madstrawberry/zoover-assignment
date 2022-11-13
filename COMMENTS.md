@@ -23,3 +23,10 @@ Assuming from the task description that when the difference in years is less tha
 For now, due to lack of time, I only handled the happy path and have not implemented an error state if something went wrong fetching data.
 
 For the sort order I assumed for now 'new to old' (desc) which is how the server returns the data. I would image in the future the user could be able to reverse the sort order.
+
+## Improvements
+
+- The implementation of showing the star rating can be improved a lot by
+  - not using gradients for full or empty stars
+  - defining reusable star path
+  - defining reusable gradients for all 9 steps and reuse them instead of generating them for each star
